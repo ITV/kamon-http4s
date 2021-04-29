@@ -32,7 +32,7 @@ object KamonSupport {
     val httpServerConfig = Kamon.config().getConfig("kamon.instrumentation.http4s.server")
     val instrumentation = HttpServerInstrumentation.from(httpServerConfig, "http4s.server", interface, port)
 
-    Kleisli((request: Request[F]) => kamonService[F](service, instrumentation)(request))
+    Kleisli(kamonService[F](service, instrumentation)(_))
   }
 
 
